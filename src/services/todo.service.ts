@@ -38,7 +38,7 @@ export const putTodo = async (id: string, form: ITodoUpdateModel) => {
 
 export const patchTodo = async (id: string, form: Partial<ITodoUpdateModel>) => {
   const response = await fetch(`${BASE_ENDPOINT}/${id}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       "Content-Type": "application/json"
     },

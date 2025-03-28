@@ -1,23 +1,45 @@
 import { useEffect, useState } from "react";
 import { useForm } from "./hooks/useForm";
-import { getTodos, postTodo } from "./services/todo.service";
+import { deleteTodo, getTodos, postTodo } from "./services/todo.service";
 import { ITodoCreateModel, ITodoModel } from "./services/todo.service-types";
 import IconDelete from "./assets/trash.svg"
+import IconEdit from "./assets/edit.svg"
 
 function App() {
   const [taskForm, handleTaskForm] = useForm({
     title: '',
     description: ''
   } as ITodoCreateModel)
+
   const [todos, setTodos] = useState<ITodoModel[]>([])
 
   const handlerAddTask = () => {
-    postTodo(taskForm as ITodoCreateModel)
+    if (taskForm.title)
+      postTodo(taskForm as ITodoCreateModel)
+        .then(response => {
+          if (response.data) {
+            setTodos(prev => prev.concat(response.data!))
+          }
+        })
+  }
+
+  const handleDelete = (todo: ITodoModel) => {
+    deleteTodo(todo.id)
       .then(response => {
-        if (response.data) {
-          setTodos(prev => prev.concat(response.data!))
+        if (response.status === 204) {
+          setTodos(prev => prev.filter(p => p.id !== todo.id))
         }
       })
+  }
+
+  const handleEdit = (todo: ITodoModel) => {
+    console.log(todo);
+    
+    // postTodo(taskForm as ITodoCreateModel)
+    //   .then(response => {
+    //     console.log(response);
+
+    //   })
   }
 
   useEffect(() => {
@@ -60,9 +82,12 @@ function App() {
                 >
                   <p>{todo.title}</p>
                   <div className="flex items-center gap-2">
-                    <span className="fill-red-500">
+                    <button onClick={() => handleDelete(todo)} className="cursor-pointer transition-colors fill-red-500 hover:fill-red-600 active:fill-red-400">
                       <IconDelete />
-                    </span>
+                    </button>
+                    <button onClick={() => handleEdit(todo)} className="cursor-pointer transition-colors fill-green-500 hover:fill-green-600 active:fill-green-400">
+                      <IconEdit />
+                    </button>
                   </div>
                 </div>
               ))}

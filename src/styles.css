@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ui-background: #16161a;
+  --color-ui-headline: #ffffff;
+  --color-ui-paragraph: #94a1b2;
+  --color-ui-button: #7f5af0;
+  --color-ui-button-text: #ffffff;
+  --color-ui-stroke: #010101;
+  --color-ui-main: #ffffff;
+  --color-ui-highlight: #7f5af0;
+  --color-ui-secondary: #72757e;
+  --color-ui-tertiary: #2cb67d;
+}

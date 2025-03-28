@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "./hooks/useForm";
 import { deleteTodo, getTodos, postTodo } from "./services/todo.service";
 import { ITodoCreateModel, ITodoModel } from "./services/todo.service-types";
-import IconDelete from "./assets/trash.svg"
-import IconEdit from "./assets/edit.svg"
+import { Icon } from "./components/icons/Icon";
 
 function App() {
   const [taskForm, handleTaskForm] = useForm({
@@ -82,11 +81,11 @@ function App() {
                 >
                   <p>{todo.title}</p>
                   <div className="flex items-center gap-2">
-                    <button onClick={() => handleDelete(todo)} className="cursor-pointer transition-colors fill-red-500 hover:fill-red-600 active:fill-red-400">
-                      <IconDelete />
+                    <button onClick={() => handleDelete(todo)} className="cursor-pointer">
+                      <Icon name="Trash" className="w-5 h-5 transition-colors fill-red-500 hover:fill-red-600 active:fill-red-400" />
                     </button>
-                    <button onClick={() => handleEdit(todo)} className="cursor-pointer transition-colors fill-green-500 hover:fill-green-600 active:fill-green-400">
-                      <IconEdit />
+                    <button onClick={() => handleEdit(todo)} className="cursor-pointer">
+                      <Icon name="Edit" className="w-5 h-5 transition-colors fill-green-500 hover:fill-green-600 active:fill-green-400" />
                     </button>
                   </div>
                 </div>

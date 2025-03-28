@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "./hooks/useForm";
 import { getTodos, postTodo } from "./services/todo.service";
 import { ITodoCreateModel, ITodoModel } from "./services/todo.service-types";
+import IconDelete from "./assets/trash.svg"
 
 function App() {
   const [taskForm, handleTaskForm] = useForm({
@@ -55,9 +56,14 @@ function App() {
               {todos.map(todo => (
                 <div 
                   key={todo.id}
-                  className="p-3 rounded bg-ui-stroke/25 text-ui-main"
+                  className="flex justify-between p-3 rounded bg-ui-stroke/25 text-ui-main"
                 >
-                  {todo.title}
+                  <p>{todo.title}</p>
+                  <div className="flex items-center gap-2">
+                    <span className="fill-red-500">
+                      <IconDelete />
+                    </span>
+                  </div>
                 </div>
               ))}
             </section>

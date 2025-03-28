@@ -1,6 +1,6 @@
 import { API_URL } from "../config"
 import { IResponse } from "../shared/types"
-import { ITodoCreateModel, ITodoModel } from "./todo.service-types"
+import { ITodoCreateModel, ITodoModel, ITodoUpdateModel } from "./todo.service-types"
 
 const BASE_ENDPOINT = `${API_URL}/todos`
 
@@ -25,26 +25,31 @@ export const postTodo = async (form: ITodoCreateModel) => {
   return response.json() as Promise<IResponse<ITodoModel>>
 }
 
-export const putTodo = async () => {
-  const res = await fetch(BASE_ENDPOINT, {
-    method: 'GET'
+export const putTodo = async (id: string, form: ITodoUpdateModel) => {
+  const response = await fetch(`${BASE_ENDPOINT}/${id}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(form)
   })
-  const data = await res.json()
-  return data
+  return response.json() as Promise<IResponse<ITodoModel>>
 }
 
-export const patchTodo = async () => {
-  const res = await fetch(BASE_ENDPOINT, {
-    method: 'GET'
+export const patchTodo = async (id: string, form: Partial<ITodoUpdateModel>) => {
+  const response = await fetch(`${BASE_ENDPOINT}/${id}`, {
+    method: 'PUT',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(form)
   })
-  const data = await res.json()
-  return data
+  return response.json() as Promise<IResponse<ITodoModel>>
 }
 
-export const deleteTodo = async () => {
-  const res = await fetch(BASE_ENDPOINT, {
-    method: 'GET'
+export const deleteTodo = async (id: string) => {
+  const response = await fetch(`${BASE_ENDPOINT}/${id}`, {
+    method: 'DELETE',
   })
-  const data = await res.json()
-  return data
+  return response.json() as Promise<IResponse<void>>
 }

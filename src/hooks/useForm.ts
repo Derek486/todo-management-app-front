@@ -1,10 +1,13 @@
 import { ChangeEvent, useState } from "react"
 
-type TInputValue = Record<string, any>
-type THandleForm = (event: ChangeEvent<HTMLInputElement>) => void
+export type TInputValue = Record<string, any>
+export type THandleForm = (event: ChangeEvent<HTMLInputElement>) => void
+export type TResetForm = <T extends TInputValue>(value?: T) => void
 
-export const useForm = <T extends TInputValue>(value: T): [TInputValue, THandleForm] => {
-  const [state, setState] = useState<T>(value)
+export const useForm = <T extends TInputValue>(initial: T): [T, THandleForm, TResetForm] => {
+  const [state, setState] = useState<T>(initial)
+
+  const resetForm: TResetForm = () => setState(initial)
 
   const handleForm: THandleForm = (event) => {
     const name = event.target.name
@@ -15,5 +18,5 @@ export const useForm = <T extends TInputValue>(value: T): [TInputValue, THandleF
     }))
   }
 
-  return [state, handleForm]
+  return [state, handleForm, resetForm]
 }

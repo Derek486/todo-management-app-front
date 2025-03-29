@@ -4,12 +4,16 @@ import { postTodo } from "./services/todo.service";
 import { ITodoCreateModel } from "./services/todo.service-types";
 import { Task } from "./components/tasks/Task";
 import { useTodos } from "./storage/todos.storage";
+import { Header } from "./fragments/Header";
+import { FormTask } from "./fragments/FormTask";
+
+const defaultForm = {
+  title: '',
+  description: ''
+} as ITodoCreateModel
 
 function App() {
-  const [taskForm, handleTaskForm] = useForm({
-    title: '',
-    description: ''
-  } as ITodoCreateModel)
+  const [taskForm, handleTaskForm, resetForm] = useForm(defaultForm)
 
   const todosStore = useTodos()
 
@@ -19,6 +23,7 @@ function App() {
         .then(response => {
           if (response.data) {
             todosStore.addTodo(response.data)
+            resetForm()
           }
         })
   }
@@ -31,27 +36,9 @@ function App() {
     <>
       <div className="h-screen flex justify-center bg-ui-background">
         <main className="flex flex-col gap-3 p-4 text-center">
-          <header>
-            <h1 className="text-xl text-ui-main">Todo <span className="text-ui-highlight">App</span></h1>
-            <p className="text-ui-paragraph">Create, read, update and delete all your tasks here</p>
-          </header>
+          <Header />
           <div className="flex flex-col gap-2">
-            <section className="flex items-center gap-2">
-              <input
-                type="text"
-                name="title"
-                value={taskForm.title}
-                onChange={(e) => handleTaskForm(e)}
-                className="flex-1 p-2 rounded transition-shadow border-2 border-ui-highlight/50 focus:outline-none focus:border-ui-highlight focus:shadow-xs focus:shadow-ui-highlight text-ui-button-text"
-                placeholder="Input the task..."
-              />
-              <button
-                onClick={() => handlerAddTask()}
-                className="h-full px-3 py-1.5 cursor-pointer rounded transition-colors border-2 border-ui-stroke/40 hover:border-ui-stroke/30 active:border-ui-stroke/20 bg-ui-button hover:bg-ui-button/80 active:bg-ui-button/60 font-semibold text-ui-button-text"
-              >
-                + Add
-              </button>
-            </section>
+            <FormTask form={taskForm} handleForm={handleTaskForm} handleSubmit={handlerAddTask} />
             <section className="flex flex-col gap-2">
               {(todosStore.todos).map(todo => (
                 <Task key={todo.id} todo={todo} />

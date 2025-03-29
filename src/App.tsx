@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "./hooks/useForm";
-import { getTodos, postTodo } from "./services/todo.service";
-import { ITodoCreateModel, ITodoModel } from "./services/todo.service-types";
+import { postTodo } from "./services/todo.service";
+import { ITodoCreateModel } from "./services/todo.service-types";
 import { Task } from "./components/tasks/Task";
+import { useTodos } from "./storage/todos.storage";
 
 function App() {
   const [taskForm, handleTaskForm] = useForm({
@@ -10,23 +11,20 @@ function App() {
     description: ''
   } as ITodoCreateModel)
 
-  const [todos, setTodos] = useState<ITodoModel[]>([])
+  const todosStore = useTodos()
 
   const handlerAddTask = () => {
     if (taskForm.title)
       postTodo(taskForm as ITodoCreateModel)
         .then(response => {
           if (response.data) {
-            setTodos(prev => prev.concat(response.data!))
+            todosStore.addTodo(response.data)
           }
         })
   }
 
   useEffect(() => {
-    getTodos()
-      .then(response => {
-        setTodos(response.data || []);
-      })
+    todosStore.loadData();
   }, [])
 
   return (
@@ -55,7 +53,7 @@ function App() {
               </button>
             </section>
             <section className="flex flex-col gap-2">
-              {todos.map(todo => (
+              {(todosStore.todos).map(todo => (
                 <Task key={todo.id} todo={todo} />
               ))}
             </section>

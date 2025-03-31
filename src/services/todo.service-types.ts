@@ -13,3 +13,5 @@ export interface ITodoCreateModel {
 export interface ITodoUpdateModel extends ITodoCreateModel {
   isComplete: boolean
 }
+
+export interface ITodoEditModel extends Partial<ITodoUpdateModel> { }

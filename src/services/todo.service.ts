@@ -1,6 +1,6 @@
 import { API_URL } from "../config"
 import { IResponse } from "../shared/types"
-import { ITodoCreateModel, ITodoModel, ITodoUpdateModel } from "./todo.service-types"
+import { ITodoCreateModel, ITodoEditModel, ITodoModel, ITodoUpdateModel } from "./todo.service-types"
 
 const BASE_ENDPOINT = `${API_URL}/todos`
 
@@ -36,7 +36,7 @@ export const putTodo = async (id: string, form: ITodoUpdateModel) => {
   return response.json() as Promise<IResponse<ITodoModel>>
 }
 
-export const patchTodo = async (id: string, form: Partial<ITodoUpdateModel>) => {
+export const patchTodo = async (id: string, form: ITodoEditModel) => {
   const response = await fetch(`${BASE_ENDPOINT}/${id}`, {
     method: 'PATCH',
     headers: {

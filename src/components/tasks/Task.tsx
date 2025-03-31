@@ -1,4 +1,4 @@
-import { ITodoModel, ITodoUpdateModel } from "@/services/todo.service-types"
+import { ITodoEditModel, ITodoModel } from "@/services/todo.service-types"
 import { useCallback, useState } from "react"
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { Icon } from "../icons/Icon"
@@ -14,7 +14,7 @@ export const Task = ({ todo }: ITaskProps) => {
   const [open, setOpen] = useState(false)
   const [form, handleForm] = useForm({
     ...todo
-  } as ITodoUpdateModel)
+  } as ITodoEditModel)
   const todosStore = useTodos();
   const handleDelete = useCallback(() => {
     deleteTodo(todo.id)
@@ -67,7 +67,7 @@ export const Task = ({ todo }: ITaskProps) => {
                       <input
                         type="text"
                         name="title"
-                        value={form.title}
+                        value={form.title || ''}
                         onChange={(e) => handleForm(e)}
                         className="flex-1 p-2 rounded transition-shadow border-2 border-ui-highlight/50 focus:outline-none focus:border-ui-highlight focus:shadow-xs focus:shadow-ui-highlight text-ui-button-text"
                         placeholder="Input the task..."

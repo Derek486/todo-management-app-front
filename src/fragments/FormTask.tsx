@@ -16,8 +16,9 @@ export const FormTask = ({ form, handleForm, handleSubmit }: IFormTaskProps) => 
         type="text"
         name="title"
         value={form.title}
-        onChange={(e) => handleForm(e)}
+        onChange={(e: any) => handleForm(e)}
         placeholder="Input the task..."
+        className="flex-1"
       />
       <Button
         onClick={() => handleSubmit()}

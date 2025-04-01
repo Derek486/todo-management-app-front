@@ -54,30 +54,28 @@ export const Task = ({ todo }: ITaskProps) => {
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <DialogPanel
               transition
-              className="relative transform overflow-hidden rounded-lg bg-ui-background text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+              className="relative transform overflow-hidden rounded-lg bg-ui-background text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 data-closed:sm:translate-y-0 data-closed:sm:scale-95"
             >
-              <div className="bg-ui-stroke/50 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100/10 sm:mx-0 sm:size-10">
-                    <Icon name="Edit" className="w-5 h-5 fill-green-500" />
-                  </div>
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <DialogTitle as="h3" className="text-base font-semibold text-ui-headline">
-                      Update task
-                    </DialogTitle>
-                    <div className="mt-2">
-                      <Input
-                        type="text"
-                        name="title"
-                        value={form.title || ''}
-                        onChange={(e) => handleForm(e)}
-                        placeholder="Input the task..."
-                      />
-                    </div>
+              <div className="flex flex-col bg-ui-stroke/50">
+                <DialogTitle className="flex flex-col gap-2 bg-ui-highlight p-4">
+                  <span className="flex items-center justify-center rounded-full border-2 border-ui-main mx-auto p-3 shadow-lg shadow-ui-stroke">
+                    <Icon name="Edit" className="w-6 h-6 fill-ui-button-text" />
+                  </span>
+                </DialogTitle>
+                <div className="flex flex-col gap-2 p-3">
+                  <p className="text-base text-center font-semibold text-ui-headline">Update task</p>
+                  <div>
+                    <Input
+                      type="text"
+                      name="title"
+                      value={form.title || ''}
+                      onChange={(e) => handleForm(e)}
+                      placeholder="Input the task..."
+                    />
                   </div>
                 </div>
               </div>
-              <div className="bg-ui-stroke/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
+              <footer className="bg-ui-stroke/50 border-t-2 border-ui-secondary/20 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-2">
                 <Button
                   onClick={handleUpdate}
                 >
@@ -89,7 +87,7 @@ export const Task = ({ todo }: ITaskProps) => {
                 >
                   Cancel
                 </Button>
-              </div>
+              </footer>
             </DialogPanel>
           </div>
         </div>

@@ -13,9 +13,9 @@ export default defineConfig({
     iconsSpritesheet([
       {
         withTypes: true,
-        inputDir: "src/assets/icons",
+        inputDir: "src/ui/assets/icons",
         outputDir: "public/icons",
-        typesOutputFile: "./src/components/icons/icons.ts",
+        typesOutputFile: "./src/ui/components/icons/icons.ts",
         fileName: "sprites.svg",
       },
     ])

@@ -1,6 +1,6 @@
-import { Button } from "@/components/Button"
-import { Input } from "@/components/Input"
-import { ITodoCreateModel } from "@/services/todo.service-types"
+import { Button } from "@/ui/components/Button"
+import { Input } from "@/ui/components/Input"
+import { ITodoCreateModel } from "@/data/todos/models/todo-create.model"
 import { ChangeEvent } from "react"
 
 interface IFormTaskProps {

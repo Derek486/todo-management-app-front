@@ -1,12 +1,13 @@
-import { ITodoEditModel, ITodoModel } from "@/services/todo.service-types"
 import { useCallback, useState } from "react"
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
 import { Icon } from "../icons/Icon"
-import { deleteTodo, patchTodo } from "@/services/todo.service"
-import { useTodos } from "@/storage/todos.storage"
-import { useForm } from "@/hooks/useForm"
+import { useTodos } from "@/data/todos/stores/todos.storage"
+import { useForm } from "@/ui/hooks/useForm"
 import { Button } from "../Button"
 import { Input } from "../Input"
+import { ITodoModel } from "@/data/todos/models/todo.model"
+import { ITodoEditModel } from "@/data/todos/models/todo-modify.model"
+import { useTodo } from "@/data/todos/stores/todo.storage"
 
 interface ITaskProps {
   todo: ITodoModel
@@ -18,24 +19,16 @@ export const Task = ({ todo }: ITaskProps) => {
     ...todo
   } as ITodoEditModel)
   const todosStore = useTodos();
+  const todoStore = useTodo();
   const handleDelete = useCallback(() => {
-    deleteTodo(todo.id)
-      .then(response => {
-        if (response.status === 204) {
-          todosStore.removeTodo(todo.id)
-        }
-      })
+    todoStore.removeTodo(todo.id).then(() => todosStore.loadData())
   }, [todo])
 
   const handleUpdate = useCallback(() => {
-    patchTodo(todo.id, form)
-      .then(res => {
-        if (res.data) {
-          todosStore.removeTodo(todo.id)
-          todosStore.addTodo(res.data)
-          setOpen(false)
-        }
-      })
+    todoStore.editTodo(todo.id, form).then(() => {
+      todosStore.loadData()
+      setOpen(false)
+    })
   }, [form])
 
   const handleEdit = useCallback(() => {

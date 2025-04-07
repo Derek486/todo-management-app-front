@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useForm } from "./hooks/useForm";
-import { postTodo } from "./services/todo.service";
-import { ITodoCreateModel } from "./services/todo.service-types";
 import { Task } from "./components/tasks/Task";
-import { useTodos } from "./storage/todos.storage";
+import { useTodos } from "../data/todos/stores/todos.storage";
 import { Header } from "./fragments/Header";
 import { FormTask } from "./fragments/FormTask";
+import { ITodoCreateModel } from "@/data/todos/models/todo-create.model";
 
 const defaultForm = {
   title: '',
@@ -19,13 +18,7 @@ function App() {
 
   const handlerAddTask = () => {
     if (taskForm.title)
-      postTodo(taskForm as ITodoCreateModel)
-        .then(response => {
-          if (response.data) {
-            todosStore.addTodo(response.data)
-            resetForm()
-          }
-        })
+      todosStore.createTodo(taskForm).then(() => resetForm())
   }
 
   useEffect(() => {

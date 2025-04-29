@@ -3,6 +3,7 @@ import {
   RouteObject,
 } from "react-router";
 import LoginPage from "./pages/login.page";
+import RegisterPage from "./pages/register.page";
 
 const router: RouteObject[] = [
   {
@@ -14,9 +15,9 @@ const router: RouteObject[] = [
     Component: LoginPage
   },
   {
-    path: '*',
-    loader: () => redirect('login')
-  }
+    path: 'register',
+    Component: RegisterPage
+  },
 ]
 
 export default router

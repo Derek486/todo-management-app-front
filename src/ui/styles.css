@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@import '@fontsource/roboto/700.css';
+
 @theme {
+  --color-ui-soft-grayblue: #2F4550;
+  --color-ui-grayblue: #586F7C;
+  --color-ui-sky: #B8DBD9;
+  --color-ui-slate: #F4F4F9;
   --color-ui-soft-black: #1A1A1A;
   --color-ui-charcoal: #2F4550;
+
+
   --color-ui-background: #16161a;
   --color-ui-headline: #ffffff;
   --color-ui-paragraph: #94a1b2;

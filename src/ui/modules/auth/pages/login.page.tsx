@@ -1,13 +1,26 @@
+import { TextField } from "@mui/material"
+import AuthCard from "../components/auth-card.component"
+
 const LoginPage = () => {
   return (
-    <div className="bg-[url(/images/background-auth.jpg)] h-screen bg-cover">
+    <div className="bg-[url(/images/background-auth.jpg)] h-full bg-cover">
       <div className="flex items-center justify-center size-full">
-        <article className="bg-white/30 backdrop-blur-md p-4 rounded-lg">
-          <h2 className="text-ui-soft-black font-bold">Sign In</h2>
-          <p className="text-ui-charcoal mt-1">Enter your email and your password</p>
-        </article>
+        <AuthCard 
+          title="Sign In"
+          subTitle="Enter your email and your password"
+          form={
+            <>
+              <TextField label="Email" size="medium" />
+              <TextField label="Password" size="medium" />
+            </>
+          }
+          textButton="Log in"
+          textFooter="New user?"
+          textFooterLink="Sign Up"
+          linkFooter="/auth/register"
+        />
       </div>
-    </div> 
+    </div>
   )
 }
 

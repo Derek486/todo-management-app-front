@@ -15,7 +15,7 @@ export default defineConfig({
         withTypes: true,
         inputDir: "src/ui/assets/icons",
         outputDir: "public/icons",
-        typesOutputFile: "./src/ui/components/icons/icons.ts",
+        typesOutputFile: "./src/ui/modules/shared/components/icons/icons.ts",
         fileName: "sprites.svg",
       },
     ])

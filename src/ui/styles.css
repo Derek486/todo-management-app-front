@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+  --color-ui-soft-black: #1A1A1A;
+  --color-ui-charcoal: #2F4550;
   --color-ui-background: #16161a;
   --color-ui-headline: #ffffff;
   --color-ui-paragraph: #94a1b2;
